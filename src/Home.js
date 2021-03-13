@@ -8,14 +8,25 @@ const Home = () => {
    const [blogs, setBlogs] = useState([
       { title: "The State", body: "Control the population", author: "Me Oh My", id: 1},
       { title: "The Republic", body: "Exploit the population", author: "What You Too", id: 2},
-      { title: "The Monarchy", body: "Rule the population", author: "Do Not Ask", id: 3}
+      { title: "The Monarchy", body: "Rule the population", author: "Do Not Ask", id: 3},
+      { title: "None Of The Above", body: "I Am", author: "Free!", id: 4}
    ]);
+
+   const handleDelete = (id) => {
+      const newBlogs = blogs.filter(blog => blog.id !== id);
+
+      setBlogs(newBlogs);
+   }
 
    
 
    return (
       <div className="home">
-         <BlogList blogs={ blogs } title="All Blogs!" />
+         <BlogList blogs={ blogs } 
+                   title="All Blogs!" 
+                   handleDelete={handleDelete} 
+                   />
+         {/* <BlogList blogs={ blogs.filter((blog) => blog.author==="Free!") } title="Free's Blogs!" /> */}
       </div>
    );
 }
