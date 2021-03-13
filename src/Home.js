@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
@@ -19,6 +19,12 @@ const Home = () => {
    }
 
    
+   // useEffect (without parameters in an array at the end) will run everytime the page is rendered.
+   useEffect(() => {
+      console.log('useEffect ran');
+      console.log(blogs);
+   });
+
 
    return (
       <div className="home">
