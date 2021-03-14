@@ -1,0 +1,8 @@
+{
+   "blogs" : [
+      { "title": "The State", "body": "Control the population", "author": "Me Oh My", "id": 1},
+      { "title": "The Republic", "body": "Exploit the population", "author": "What You Too", "id": 2},
+      { "title": "The Monarchy", "body": "Rule the population", "author": "Do Not Ask", "id": 3},
+      { "title": "None Of The Above", "body": "I Am", "author": "Free!", "id": 4}
+   ]
+}
