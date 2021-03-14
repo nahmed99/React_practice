@@ -7,6 +7,8 @@ const Home = () => {
    // If changes are detected, then the app will react to those changes (re-render the template where they exist)
 
    const [blogs, setBlogs] = useState(null);
+   const [isLoading, setIsLoading] = useState(true);
+   const [error, setError] = useState(null);
 
    // const [blogs, setBlogs] = useState([
    //    { title: "The State", body: "Control the population", author: "Me Oh My", id: 1},
@@ -16,33 +18,42 @@ const Home = () => {
    // ]);
 
    
-
-   const handleDelete = (id) => {
-      const newBlogs = blogs.filter(blog => blog.id !== id);
-
-      setBlogs(newBlogs);
-   }
-
-   
    // useEffect (without a dependency array) will run everytime the page is rendered.
    useEffect(() => {
       fetch('http://localhost:8000/blogs')
       .then(response => {
+
+         // console.log(response);
+         if (!response.ok) {
+            throw Error("Could not fetch data for this resource");
+         }
+         
          return response.json() //parses json data into JS object format - in this case, that is an array.
       })
       .then((data) => { // date returned from above (then)
          setBlogs(data);
-         console.log(data);
+         setError(null); // reset any error messages
+         setIsLoading(false);
+      })
+      .catch(err => {
+         setError(err.message); // catch server error
+         setIsLoading(false);
       })
    }, []);  // empty dependency array ensures that useEffect only runs on initial render, and not for any subsequent renders.
 
 
    return (
       <div className="home">
+
+         { error && <div> {error } </div> }
+
+         {/* {!blogs && <h3>Loading...</h3>} */}
+         { isLoading && <div>Loading...</div> }
+
          {blogs && <BlogList blogs={ blogs } 
                    title="All Blogs!" 
-                   handleDelete={handleDelete} 
                    />}
+
          {/* <BlogList blogs={ blogs.filter((blog) => blog.author==="Free!") } title="Free's Blogs!" /> */}
       </div>
    );

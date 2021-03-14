@@ -3,7 +3,7 @@
    // blogs = props.blogs;   // This way you have to retrieve from the props high-level qualifier
    // title = props.title;
 
-const BlogList = ( { blogs, title, handleDelete } ) => {  // De-structured variable(s)
+const BlogList = ( { blogs, title } ) => {  // De-structured variable(s)
 
 
    return (
@@ -13,7 +13,6 @@ const BlogList = ( { blogs, title, handleDelete } ) => {  // De-structured varia
             <div className="blog-preview" key={blog.id}>
                <h2> { blog.title } </h2>
                <p>Written by { blog.author } </p>
-               <button onClick={ () => handleDelete(blog.id) }>Delete Blog</button>
             </div>
          )) }
       </div>
